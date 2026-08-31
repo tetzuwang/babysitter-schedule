@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#244A7A">
+<title>2026 年 9 月保母班表</title>
+<style>
+:root {
+  --navy:#244A7A; --blue:#315B8F; --pale:#EAF2FB; --line:#D7E1EC;
+  --text:#1F2937; --muted:#6B7280; --weekend:#F3F4F6;
+  --plus-bg:#E7F4EA; --plus:#28713D; --minus-bg:#FCE8E6; --minus:#A33D2E;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;background:#F7F9FC;color:var(--text)}
+header{background:var(--navy);color:#fff;padding:18px 16px 20px;position:sticky;top:0;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+header h1{font-size:20px;margin:0 0 10px;font-weight:750}
+.today{background:#fff;color:var(--navy);border-radius:14px;padding:13px 14px;font-size:18px;font-weight:750;line-height:1.35}
+.today small{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-top:4px}
+main{max-width:1100px;margin:auto;padding:14px}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.stat b{display:block;font-size:18px;color:var(--navy)} .stat span{font-size:12px;color:var(--muted)}
+.week{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 2px 6px rgba(36,74,122,.05)}
+.week-title{background:var(--blue);color:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.week-title small{font-weight:500;opacity:.9}
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr)}
+.day-card{padding:10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:145px;background:#fff}
+.day-card:nth-child(7n){border-right:0}
+.day-card.weekend{background:var(--weekend)}
+.day-card.outside{background:#FAFAFA;color:#9CA3AF}
+.day-card.today-highlight{outline:3px solid #F3B64A;outline-offset:-3px;background:#FFF9E8}
+.date-line{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-bottom:8px}
+.date-line strong{font-size:14px;color:var(--navy)}
+.shift{font-size:14px;line-height:1.5;font-weight:650;margin-bottom:7px}
+.shift.rest{font-size:16px;color:#4B5563}
+.meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px;color:#4B5563;line-height:1.4}
+.badge{padding:2px 7px;border-radius:999px;font-weight:700}
+.badge.plus{background:var(--plus-bg);color:var(--plus)}
+.badge.minus{background:var(--minus-bg);color:var(--minus)}
+.badge.zero{background:#EEF2F7;color:#56606F}
+.note{margin-top:8px;padding-top:7px;border-top:1px dashed #D6DCE5;font-size:12px;line-height:1.45;color:#6A4D14;white-space:pre-line}
+.muted{font-size:12px;color:#9CA3AF}
+.rules{background:#FFF8E6;border:1px solid #EED89B;border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.65;color:#6B5412;margin-bottom:24px}
+footer{text-align:center;color:#8B95A5;font-size:11px;padding:0 12px 26px}
+@media(max-width:760px){
+  header{position:relative}
+  main{padding:10px}
+  .today{font-size:17px}
+  .summary{grid-template-columns:repeat(3,1fr)}
+  .week{border-radius:14px}
+  .week-grid{display:block}
+  .day-card{min-height:0;border-right:0;padding:11px 12px}
+  .day-card.outside{display:none}
+  .date-line{margin-bottom:5px}
+  .shift{font-size:16px;margin-bottom:5px}
+  .meta{font-size:12px}
+  .note{font-size:13px}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>2026 年 9 月保母班表</h1>
+  <div id="today" class="today">今日排班讀取中…</div>
+</header>
+<main>
+  <div class="summary">
+    <div class="stat"><b>17h</b><span>加班</span></div>
+    <div class="stat"><b>17h</b><span>扣抵</span></div>
+    <div class="stat"><b>0h</b><span>本月淨增減</span></div>
+  </div>
+  
+    <section class="week">
+      <div class="week-title"><span>Week 1</span><small>08/31–09/06</small></div>
+      <div class="week-grid">
+        <div class="day-card outside"><div class="date-line"><span>週一</span><strong>08/31</strong></div><div class="muted">9 月班表外</div></div>
+            <div class="day-card" data-date="2026-09-01">
+              <div class="date-line"><span>週二</span><strong>09/01</strong></div>
+              <div class="shift">07:50–17:50 <b>[鍇]</b></div>
+              <div class="meta"><span class="badge plus">+1h</span><span>門診日</span></div>
+              
+            </div>
+            
+            <div class="day-card" data-date="2026-09-02">
+              <div class="date-line"><span>週三</span><strong>09/02</strong></div>
+              <div class="shift">08:00–14:00 <b>[阿公]</b></div>
+              <div class="meta"><span class="badge minus">-3h</span><span>阿公14:00接手</span></div>
+              
+            </div>
+            
+            <div class="day-card" data-date="2026-09-03">
+              <div class="date-line"><span>週四</span><strong>09/03</strong></div>
+              <div class="shift">06:50–17:50 <b>[鍇]</b></div>
+              <div class="meta"><span class="badge plus">+2h</span><span>07:30早會／會議</span></div>
+              <div class="note">07:30–08:30 全院</div>
+            </div>
+            
+            <div class="day-card" data-date="2026-09-04">
+              <div class="date-line"><span>週五</span><strong>09/04</strong></div>
+              <div class="shift">06:50–17:50 <b>[鍇]</b></div>
+              <div class="meta"><span class="badge plus">+2h</span><span>07:30早會／會議</span></div>
+              <div class="note">07:30–08:30 核心課</div>
+            </div>
+            
+            <div class="day-card weekend" data-date="2026-09-05">
+              <div class="date-line"><span>週六</span><strong>09/05</strong></div>
+              <div class="shift rest">休假</div>
+              
+            </div>
+            
+            <div class="day-card weekend" data-date="2026-09-06">
+              <div class="date-line"><span>週日</span><strong>09/06</strong></div>
+              <div class="shift rest">休假</div>
+              <div class="note">婦專線上課考試</div>
+            </div>
+            
+      </div>
+    </section>
+    
+    <section class="week">
+      <div class="week-title"><span>Week 2</span><small>09/07–09/13</small></div>
+      <div class="week-grid">
+        
+            <div class="day-card" data-date="2026-09-07">
+              <div class="date-line"><span>週一</span><strong>09/07</strong></div>
+              <div class="shift">08:00–18:00 <b>[鍇]</b></div>
+              <div class="meta"><span class="badge plus">+1h</span><span>常態加班1小時</span></div>
+              
+            </div>
+            
+            <div class="day-card" data-date="2026-09-08">
+              <div class="date-line"><span>週二</span><strong>09/08</strong></div>
+              <div class="shift">06:50–17:50 <b>[鍇]</b></div>
+              <div class="meta"><span class="badge plus">+2h</span><span>07:30早會／會議</span></div>
+              <div class="note">07:30–08:30 核心課；18:30–21:45 恩賜跟診</div>
+            </div>
+            
+            <div class="day-card" data-date="2026-09-09">
+              <div class="date-line"><span>週三</span><strong>09/09</strong></div>
+              <div class="shift">08:00–14:00 <b>[阿公]</b></div>
+              <div class="meta"><span class="badge minus">-3h</span><span>阿公14:00接手</span></div>
+              
+            </div>
+            
+            <div class="day-card" data-date="2026-09-10">
+              <div class="date-line"><span>週四</span><strong>09/10</strong></div>
+              <div class="shift">08:00–18:00 <b>[鍇]</b></div>
+              <div class="meta"><span class="badge plus">+1h</span><span>常態加班1小時</span></div>
+              
+            </div>
+            
+            <div class="day-card" data-date="2026-09-11">
+              <div class="date-line"><span>週五</span><strong>09/11</strong></div>
+              <div class="shift">07:50–17:50 <b>[鍇]</b></div>
+              <div class="meta"><span class="badge plus">+1h</span><span>門診日</span></div>
+              
+            </div>
+            
+            <div class="day-card weekend" data-date="2026-09-12">
+              <div class="date-line"><span>週六</span><strong>09/12</strong></div>
+              <div class="shift rest">休假</div>
+              
+            </div>
+            
+            <div class="day-card weekend" data-date="2026-09-13">
+              <div class="date-line"><span>週日</span><strong>09/13</strong></div>
+              <div class="shift rest">休假</div>
+              <div class="note">10:30–17:00 大台中中醫師公會演講</div>
+            </div>
+            
+      </div>
+    </section>
+    
+    <section class="week">
+      <div class="week-title"><span>Week 3</span><small>09/14–09/20</small></div>
+      <div class="week-grid">
+        
+            <div class="day-card" data-date="2026-09-14">
+              <div class="date-line"><span>週一</span><strong>09/14</strong></div>
+              <div class="shift">06:50–17:50 <b>[鍇]</b></div>
+              <div class="meta"><span class="badge plus">+2h</span><span>07:30早會／會議</span></div>
+              <div class="note">07:30–08:30 部務會議</div>
+            </div>
+            
+            <div class="day-card" data-date="2026-09-15">
+              <div class="date-line"><span>週二</span><strong>09/15</strong></div>
+              <div class="shift">07:50–17:50 <b>[鍇]</b></div>
+              <div class="meta"><span class="badge plus">+1h</span><span>門診日</span></div>
+              
+            </div>
+            
+            <div class="day-card" data-date="2026-09-16">
+              <div class="date-line"><span>週三</span><strong>09/16</strong></div>
+              <div class="shift">08:00–14:00 <b>[阿公]</b></div>
+              <div class="meta"><span class="badge minus">-3h</span><span>阿公14:00接手</span></div>
+              <div class="note">16:30–17:30 師培501</div>
+            </div>
+            
+            <div class="day-card" data-date="2026-09-17">
+              <div class="date-line"><span>週四</span><strong>09/17</strong></div>
+              <div class="shift">06:50–16:50 <b>[慈]</b></div>
+              <div class="meta"><span class="badge plus">+1h</span><span>07:30早會／會議</span></div>
+              <div class="note">07:30–08:30 全院</div>
+            </div>
+            
+            <div class="day-card" data-date="2026-09-18">
+              <div class="date-line"><span>週五</span><strong>09/18</strong></div>
+              <div class="shift">07:50–16:50 <b>[慈]</b></div>
+              <div class="meta"><span class="badge zero">0h</span><span>門診日／提早1小時下班抵扣</span></div>
+              
+            </div>
+            
+            <div class="day-card weekend" data-date="2026-09-19">
+              <div class="date-line"><span>週六</span><strong>09/19</strong></div>
+              <div class="shift rest">休假</div>
+              
+            </div>
+            
+            <div class="day-card weekend" data-date="2026-09-20">
+              <div class="date-line"><span>週日</span><strong>09/20</strong></div>
+              <div class="shift rest">休假</div>
+              
+            </div>
+            
+      </div>
+    </section>
+    
+    <section class="week">
+      <div class="week-title"><span>Week 4</span><small>09/21–09/27</small></div>
+      <div class="week-grid">
+        
+            <div class="day-card" data-date="2026-09-21">
+              <div class="date-line"><span>週一</span><strong>09/21</strong></div>
+              <div class="shift">08:00–15:00 <b>[慈]</b></div>
+              <div class="meta"><span class="badge minus">-2h</span><span>後半月工時抵扣</span></div>
+              
+            </div>
+            
+            <div class="day-card" data-date="2026-09-22">
+              <div class="date-line"><span>週二</span><strong>09/22</strong></div>
+              <div class="shift">07:50–17:50 <b>[慈]</b></div>
+              <div class="meta"><span class="badge plus">+1h</span><span>門診日</span></div>
+              
+            </div>
+            
+            <div class="day-card" data-date="2026-09-23">
+              <div class="date-line"><span>週三</span><strong>09/23</strong></div>
+              <div class="shift">08:00–14:00 <b>[阿公]</b></div>
+              <div class="meta"><span class="badge minus">-3h</span><span>阿公14:00接手</span></div>
+              
+            </div>
+            
+            <div class="day-card" data-date="2026-09-24">
+              <div class="date-line"><span>週四</span><strong>09/24</strong></div>
+              <div class="shift">06:50–16:50 <b>[慈]</b></div>
+              <div class="meta"><span class="badge plus">+1h</span><span>07:30早會／會議</span></div>
+              <div class="note">07:30–08:30 醫教會；18:00–19:20 阿宏塞跟診</div>
+            </div>
+            
+            <div class="day-card" data-date="2026-09-25">
+              <div class="date-line"><span>週五</span><strong>09/25</strong></div>
+              <div class="shift">07:50–16:50 <b>[慈]</b></div>
+              <div class="meta"><span class="badge zero">0h</span><span>門診日／提早1小時下班抵扣</span></div>
+              
+            </div>
+            
+            <div class="day-card weekend" data-date="2026-09-26">
+              <div class="date-line"><span>週六</span><strong>09/26</strong></div>
+              <div class="shift rest">休假</div>
+              
+            </div>
+            
+            <div class="day-card weekend" data-date="2026-09-27">
+              <div class="date-line"><span>週日</span><strong>09/27</strong></div>
+              <div class="shift rest">休假</div>
+              
+            </div>
+            
+      </div>
+    </section>
+    
+    <section class="week">
+      <div class="week-title"><span>Week 5</span><small>09/28–10/04</small></div>
+      <div class="week-grid">
+        
+            <div class="day-card" data-date="2026-09-28">
+              <div class="date-line"><span>週一</span><strong>09/28</strong></div>
+              <div class="shift">08:00–17:00 <b>[慈]</b></div>
+              <div class="meta"><span class="badge zero">0h</span><span>常規日</span></div>
+              
+            </div>
+            
+            <div class="day-card" data-date="2026-09-29">
+              <div class="date-line"><span>週二</span><strong>09/29</strong></div>
+              <div class="shift">07:50–17:50 <b>[慈]</b></div>
+              <div class="meta"><span class="badge plus">+1h</span><span>門診日</span></div>
+              
+            </div>
+            
+            <div class="day-card" data-date="2026-09-30">
+              <div class="date-line"><span>週三</span><strong>09/30</strong></div>
+              <div class="shift">08:00–14:00 <b>[阿公]</b></div>
+              <div class="meta"><span class="badge minus">-3h</span><span>阿公14:00接手</span></div>
+              
+            </div>
+            <div class="day-card outside"><div class="date-line"><span>週四</span><strong>10/01</strong></div><div class="muted">9 月班表外</div></div><div class="day-card outside"><div class="date-line"><span>週五</span><strong>10/02</strong></div><div class="muted">9 月班表外</div></div><div class="day-card outside"><div class="date-line"><span>週六</span><strong>10/03</strong></div><div class="muted">9 月班表外</div></div><div class="day-card outside"><div class="date-line"><span>週日</span><strong>10/04</strong></div><div class="muted">9 月班表外</div></div>
+      </div>
+    </section>
+    
+  <div class="rules">
+    <b>固定規則：</b>每週三 08:00–14:00，由阿公 14:00 接手，當日 -3h。9/1–9/15 其餘平日下班維持 17:50–18:00；後半月以固定週三扣抵及 9/21 提早下班平衡工時。
+  </div>
+</main>
+<footer>此頁可直接用手機瀏覽器開啟；今日排班依手機日期自動顯示。</footer>
+<script>
+const schedule = [{"date": "2026-09-01", "md": "09/01", "weekday": "星期二", "caregiver": "鍇", "start": "07:50", "end": "17:50", "hours": 10, "diff": 1, "type": "門診日", "note": ""}, {"date": "2026-09-02", "md": "09/02", "weekday": "星期三", "caregiver": "阿公", "start": "08:00", "end": "14:00", "hours": 6, "diff": -3, "type": "阿公14:00接手", "note": ""}, {"date": "2026-09-03", "md": "09/03", "weekday": "星期四", "caregiver": "鍇", "start": "06:50", "end": "17:50", "hours": 11, "diff": 2, "type": "07:30早會／會議", "note": "07:30–08:30 全院"}, {"date": "2026-09-04", "md": "09/04", "weekday": "星期五", "caregiver": "鍇", "start": "06:50", "end": "17:50", "hours": 11, "diff": 2, "type": "07:30早會／會議", "note": "07:30–08:30 核心課"}, {"date": "2026-09-05", "md": "09/05", "weekday": "星期六", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": ""}, {"date": "2026-09-06", "md": "09/06", "weekday": "星期日", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": "婦專線上課考試"}, {"date": "2026-09-07", "md": "09/07", "weekday": "星期一", "caregiver": "鍇", "start": "08:00", "end": "18:00", "hours": 10, "diff": 1, "type": "常態加班1小時", "note": ""}, {"date": "2026-09-08", "md": "09/08", "weekday": "星期二", "caregiver": "鍇", "start": "06:50", "end": "17:50", "hours": 11, "diff": 2, "type": "07:30早會／會議", "note": "07:30–08:30 核心課；18:30–21:45 恩賜跟診"}, {"date": "2026-09-09", "md": "09/09", "weekday": "星期三", "caregiver": "阿公", "start": "08:00", "end": "14:00", "hours": 6, "diff": -3, "type": "阿公14:00接手", "note": ""}, {"date": "2026-09-10", "md": "09/10", "weekday": "星期四", "caregiver": "鍇", "start": "08:00", "end": "18:00", "hours": 10, "diff": 1, "type": "常態加班1小時", "note": ""}, {"date": "2026-09-11", "md": "09/11", "weekday": "星期五", "caregiver": "鍇", "start": "07:50", "end": "17:50", "hours": 10, "diff": 1, "type": "門診日", "note": ""}, {"date": "2026-09-12", "md": "09/12", "weekday": "星期六", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": ""}, {"date": "2026-09-13", "md": "09/13", "weekday": "星期日", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": "10:30–17:00 大台中中醫師公會演講"}, {"date": "2026-09-14", "md": "09/14", "weekday": "星期一", "caregiver": "鍇", "start": "06:50", "end": "17:50", "hours": 11, "diff": 2, "type": "07:30早會／會議", "note": "07:30–08:30 部務會議"}, {"date": "2026-09-15", "md": "09/15", "weekday": "星期二", "caregiver": "鍇", "start": "07:50", "end": "17:50", "hours": 10, "diff": 1, "type": "門診日", "note": ""}, {"date": "2026-09-16", "md": "09/16", "weekday": "星期三", "caregiver": "阿公", "start": "08:00", "end": "14:00", "hours": 6, "diff": -3, "type": "阿公14:00接手", "note": "16:30–17:30 師培501"}, {"date": "2026-09-17", "md": "09/17", "weekday": "星期四", "caregiver": "慈", "start": "06:50", "end": "16:50", "hours": 10, "diff": 1, "type": "07:30早會／會議", "note": "07:30–08:30 全院"}, {"date": "2026-09-18", "md": "09/18", "weekday": "星期五", "caregiver": "慈", "start": "07:50", "end": "16:50", "hours": 9, "diff": 0, "type": "門診日／提早1小時下班抵扣", "note": ""}, {"date": "2026-09-19", "md": "09/19", "weekday": "星期六", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": ""}, {"date": "2026-09-20", "md": "09/20", "weekday": "星期日", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": ""}, {"date": "2026-09-21", "md": "09/21", "weekday": "星期一", "caregiver": "慈", "start": "08:00", "end": "15:00", "hours": 7, "diff": -2, "type": "後半月工時抵扣", "note": ""}, {"date": "2026-09-22", "md": "09/22", "weekday": "星期二", "caregiver": "慈", "start": "07:50", "end": "17:50", "hours": 10, "diff": 1, "type": "門診日", "note": ""}, {"date": "2026-09-23", "md": "09/23", "weekday": "星期三", "caregiver": "阿公", "start": "08:00", "end": "14:00", "hours": 6, "diff": -3, "type": "阿公14:00接手", "note": ""}, {"date": "2026-09-24", "md": "09/24", "weekday": "星期四", "caregiver": "慈", "start": "06:50", "end": "16:50", "hours": 10, "diff": 1, "type": "07:30早會／會議", "note": "07:30–08:30 醫教會；18:00–19:20 阿宏塞跟診"}, {"date": "2026-09-25", "md": "09/25", "weekday": "星期五", "caregiver": "慈", "start": "07:50", "end": "16:50", "hours": 9, "diff": 0, "type": "門診日／提早1小時下班抵扣", "note": ""}, {"date": "2026-09-26", "md": "09/26", "weekday": "星期六", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": ""}, {"date": "2026-09-27", "md": "09/27", "weekday": "星期日", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": ""}, {"date": "2026-09-28", "md": "09/28", "weekday": "星期一", "caregiver": "慈", "start": "08:00", "end": "17:00", "hours": 9, "diff": 0, "type": "常規日", "note": ""}, {"date": "2026-09-29", "md": "09/29", "weekday": "星期二", "caregiver": "慈", "start": "07:50", "end": "17:50", "hours": 10, "diff": 1, "type": "門診日", "note": ""}, {"date": "2026-09-30", "md": "09/30", "weekday": "星期三", "caregiver": "阿公", "start": "08:00", "end": "14:00", "hours": 6, "diff": -3, "type": "阿公14:00接手", "note": ""}];
+function localDateKey(){
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+const key = localDateKey();
+const item = schedule.find(x => x.date === key);
+const box = document.getElementById('today');
+if(item){
+  if(item.start && item.end){
+    box.innerHTML = `今日 ${item.md}　${item.start}–${item.end} [${item.caregiver}]` +
+      `<small>${item.type || ''}${item.note ? '｜'+item.note : ''}</small>`;
+  } else {
+    box.innerHTML = `今日 ${item.md}　休假` + `<small>${item.note || ''}</small>`;
+  }
+  const el = document.querySelector(`[data-date="${key}"]`);
+  if(el) el.classList.add('today-highlight');
+} else {
+  const d = new Date();
+  const md = String(d.getMonth()+1).padStart(2,'0') + '/' + String(d.getDate()).padStart(2,'0');
+  box.innerHTML = `今日 ${md}　9 月班表無資料` + `<small>班表期間：2026/09/01–09/30</small>`;
+}
+</script>
+</body>
+</html>
