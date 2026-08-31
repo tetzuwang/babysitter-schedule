@@ -1,344 +1,3192 @@
 <!doctype html>
+
 <html lang="zh-Hant">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#244A7A">
-<title>2026 年 9 月保母班表</title>
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, viewport-fit=cover"
+>
+
+<meta
+  name="theme-color"
+  content="#244A7A"
+>
+
+<title>保母班表</title>
+
+
 <style>
+
+/* =========================
+   基本顏色
+========================= */
+
 :root {
-  --navy:#244A7A; --blue:#315B8F; --pale:#EAF2FB; --line:#D7E1EC;
-  --text:#1F2937; --muted:#6B7280; --weekend:#F3F4F6;
-  --plus-bg:#E7F4EA; --plus:#28713D; --minus-bg:#FCE8E6; --minus:#A33D2E;
+
+  --navy:#244A7A;
+
+  --blue:#315B8F;
+
+  --line:#D7E1EC;
+
+  --text:#1F2937;
+
+  --muted:#6B7280;
+
+  --weekend:#F3F4F6;
+
+  --plus-bg:#E7F4EA;
+
+  --plus:#28713D;
+
+  --minus-bg:#FCE8E6;
+
+  --minus:#A33D2E;
+
+  --accent:#F3B64A;
+
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;background:#F7F9FC;color:var(--text)}
-header{background:var(--navy);color:#fff;padding:18px 16px 20px;position:sticky;top:0;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.12)}
-header h1{font-size:20px;margin:0 0 10px;font-weight:750}
-.today{background:#fff;color:var(--navy);border-radius:14px;padding:13px 14px;font-size:18px;font-weight:750;line-height:1.35}
-.today small{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-top:4px}
-main{max-width:1100px;margin:auto;padding:14px}
-.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
-.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
-.stat b{display:block;font-size:18px;color:var(--navy)} .stat span{font-size:12px;color:var(--muted)}
-.week{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 2px 6px rgba(36,74,122,.05)}
-.week-title{background:var(--blue);color:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;font-weight:700}
-.week-title small{font-weight:500;opacity:.9}
-.week-grid{display:grid;grid-template-columns:repeat(7,1fr)}
-.day-card{padding:10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:145px;background:#fff}
-.day-card:nth-child(7n){border-right:0}
-.day-card.weekend{background:var(--weekend)}
-.day-card.outside{background:#FAFAFA;color:#9CA3AF}
-.day-card.today-highlight{outline:3px solid #F3B64A;outline-offset:-3px;background:#FFF9E8}
-.date-line{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-bottom:8px}
-.date-line strong{font-size:14px;color:var(--navy)}
-.shift{font-size:14px;line-height:1.5;font-weight:650;margin-bottom:7px}
-.shift.rest{font-size:16px;color:#4B5563}
-.meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px;color:#4B5563;line-height:1.4}
-.badge{padding:2px 7px;border-radius:999px;font-weight:700}
-.badge.plus{background:var(--plus-bg);color:var(--plus)}
-.badge.minus{background:var(--minus-bg);color:var(--minus)}
-.badge.zero{background:#EEF2F7;color:#56606F}
-.note{margin-top:8px;padding-top:7px;border-top:1px dashed #D6DCE5;font-size:12px;line-height:1.45;color:#6A4D14;white-space:pre-line}
-.muted{font-size:12px;color:#9CA3AF}
-.rules{background:#FFF8E6;border:1px solid #EED89B;border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.65;color:#6B5412;margin-bottom:24px}
-footer{text-align:center;color:#8B95A5;font-size:11px;padding:0 12px 26px}
-@media(max-width:760px){
-  header{position:relative}
-  main{padding:10px}
-  .today{font-size:17px}
-  .summary{grid-template-columns:repeat(3,1fr)}
-  .week{border-radius:14px}
-  .week-grid{display:block}
-  .day-card{min-height:0;border-right:0;padding:11px 12px}
-  .day-card.outside{display:none}
-  .date-line{margin-bottom:5px}
-  .shift{font-size:16px;margin-bottom:5px}
-  .meta{font-size:12px}
-  .note{font-size:13px}
+
+
+
+/* =========================
+   基本設定
+========================= */
+
+* {
+
+  box-sizing:border-box;
+
 }
-</style>
-</head>
-<body>
-<header>
-  <h1>2026 年 9 月保母班表</h1>
-  <div id="today" class="today">今日排班讀取中…</div>
-</header>
-<main>
-  <div class="summary">
-    <div class="stat"><b>17h</b><span>加班</span></div>
-    <div class="stat"><b>17h</b><span>扣抵</span></div>
-    <div class="stat"><b>0h</b><span>本月淨增減</span></div>
-  </div>
-  
-    <section class="week">
-      <div class="week-title"><span>Week 1</span><small>08/31–09/06</small></div>
-      <div class="week-grid">
-        <div class="day-card outside"><div class="date-line"><span>週一</span><strong>08/31</strong></div><div class="muted">9 月班表外</div></div>
-            <div class="day-card" data-date="2026-09-01">
-              <div class="date-line"><span>週二</span><strong>09/01</strong></div>
-              <div class="shift">07:50–17:50 <b>[鍇]</b></div>
-              <div class="meta"><span class="badge plus">+1h</span><span>門診日</span></div>
-              
-            </div>
-            
-            <div class="day-card" data-date="2026-09-02">
-              <div class="date-line"><span>週三</span><strong>09/02</strong></div>
-              <div class="shift">08:00–14:00 <b>[阿公]</b></div>
-              <div class="meta"><span class="badge minus">-3h</span><span>阿公14:00接手</span></div>
-              
-            </div>
-            
-            <div class="day-card" data-date="2026-09-03">
-              <div class="date-line"><span>週四</span><strong>09/03</strong></div>
-              <div class="shift">06:50–17:50 <b>[鍇]</b></div>
-              <div class="meta"><span class="badge plus">+2h</span><span>07:30早會／會議</span></div>
-              <div class="note">07:30–08:30 全院</div>
-            </div>
-            
-            <div class="day-card" data-date="2026-09-04">
-              <div class="date-line"><span>週五</span><strong>09/04</strong></div>
-              <div class="shift">06:50–17:50 <b>[鍇]</b></div>
-              <div class="meta"><span class="badge plus">+2h</span><span>07:30早會／會議</span></div>
-              <div class="note">07:30–08:30 核心課</div>
-            </div>
-            
-            <div class="day-card weekend" data-date="2026-09-05">
-              <div class="date-line"><span>週六</span><strong>09/05</strong></div>
-              <div class="shift rest">休假</div>
-              
-            </div>
-            
-            <div class="day-card weekend" data-date="2026-09-06">
-              <div class="date-line"><span>週日</span><strong>09/06</strong></div>
-              <div class="shift rest">休假</div>
-              <div class="note">婦專線上課考試</div>
-            </div>
-            
-      </div>
-    </section>
-    
-    <section class="week">
-      <div class="week-title"><span>Week 2</span><small>09/07–09/13</small></div>
-      <div class="week-grid">
-        
-            <div class="day-card" data-date="2026-09-07">
-              <div class="date-line"><span>週一</span><strong>09/07</strong></div>
-              <div class="shift">08:00–18:00 <b>[鍇]</b></div>
-              <div class="meta"><span class="badge plus">+1h</span><span>常態加班1小時</span></div>
-              
-            </div>
-            
-            <div class="day-card" data-date="2026-09-08">
-              <div class="date-line"><span>週二</span><strong>09/08</strong></div>
-              <div class="shift">06:50–17:50 <b>[鍇]</b></div>
-              <div class="meta"><span class="badge plus">+2h</span><span>07:30早會／會議</span></div>
-              <div class="note">07:30–08:30 核心課；18:30–21:45 恩賜跟診</div>
-            </div>
-            
-            <div class="day-card" data-date="2026-09-09">
-              <div class="date-line"><span>週三</span><strong>09/09</strong></div>
-              <div class="shift">08:00–14:00 <b>[阿公]</b></div>
-              <div class="meta"><span class="badge minus">-3h</span><span>阿公14:00接手</span></div>
-              
-            </div>
-            
-            <div class="day-card" data-date="2026-09-10">
-              <div class="date-line"><span>週四</span><strong>09/10</strong></div>
-              <div class="shift">08:00–18:00 <b>[鍇]</b></div>
-              <div class="meta"><span class="badge plus">+1h</span><span>常態加班1小時</span></div>
-              
-            </div>
-            
-            <div class="day-card" data-date="2026-09-11">
-              <div class="date-line"><span>週五</span><strong>09/11</strong></div>
-              <div class="shift">07:50–17:50 <b>[鍇]</b></div>
-              <div class="meta"><span class="badge plus">+1h</span><span>門診日</span></div>
-              
-            </div>
-            
-            <div class="day-card weekend" data-date="2026-09-12">
-              <div class="date-line"><span>週六</span><strong>09/12</strong></div>
-              <div class="shift rest">休假</div>
-              
-            </div>
-            
-            <div class="day-card weekend" data-date="2026-09-13">
-              <div class="date-line"><span>週日</span><strong>09/13</strong></div>
-              <div class="shift rest">休假</div>
-              <div class="note">10:30–17:00 大台中中醫師公會演講</div>
-            </div>
-            
-      </div>
-    </section>
-    
-    <section class="week">
-      <div class="week-title"><span>Week 3</span><small>09/14–09/20</small></div>
-      <div class="week-grid">
-        
-            <div class="day-card" data-date="2026-09-14">
-              <div class="date-line"><span>週一</span><strong>09/14</strong></div>
-              <div class="shift">06:50–17:50 <b>[鍇]</b></div>
-              <div class="meta"><span class="badge plus">+2h</span><span>07:30早會／會議</span></div>
-              <div class="note">07:30–08:30 部務會議</div>
-            </div>
-            
-            <div class="day-card" data-date="2026-09-15">
-              <div class="date-line"><span>週二</span><strong>09/15</strong></div>
-              <div class="shift">07:50–17:50 <b>[鍇]</b></div>
-              <div class="meta"><span class="badge plus">+1h</span><span>門診日</span></div>
-              
-            </div>
-            
-            <div class="day-card" data-date="2026-09-16">
-              <div class="date-line"><span>週三</span><strong>09/16</strong></div>
-              <div class="shift">08:00–14:00 <b>[阿公]</b></div>
-              <div class="meta"><span class="badge minus">-3h</span><span>阿公14:00接手</span></div>
-              <div class="note">16:30–17:30 師培501</div>
-            </div>
-            
-            <div class="day-card" data-date="2026-09-17">
-              <div class="date-line"><span>週四</span><strong>09/17</strong></div>
-              <div class="shift">06:50–16:50 <b>[慈]</b></div>
-              <div class="meta"><span class="badge plus">+1h</span><span>07:30早會／會議</span></div>
-              <div class="note">07:30–08:30 全院</div>
-            </div>
-            
-            <div class="day-card" data-date="2026-09-18">
-              <div class="date-line"><span>週五</span><strong>09/18</strong></div>
-              <div class="shift">07:50–16:50 <b>[慈]</b></div>
-              <div class="meta"><span class="badge zero">0h</span><span>門診日／提早1小時下班抵扣</span></div>
-              
-            </div>
-            
-            <div class="day-card weekend" data-date="2026-09-19">
-              <div class="date-line"><span>週六</span><strong>09/19</strong></div>
-              <div class="shift rest">休假</div>
-              
-            </div>
-            
-            <div class="day-card weekend" data-date="2026-09-20">
-              <div class="date-line"><span>週日</span><strong>09/20</strong></div>
-              <div class="shift rest">休假</div>
-              
-            </div>
-            
-      </div>
-    </section>
-    
-    <section class="week">
-      <div class="week-title"><span>Week 4</span><small>09/21–09/27</small></div>
-      <div class="week-grid">
-        
-            <div class="day-card" data-date="2026-09-21">
-              <div class="date-line"><span>週一</span><strong>09/21</strong></div>
-              <div class="shift">08:00–15:00 <b>[慈]</b></div>
-              <div class="meta"><span class="badge minus">-2h</span><span>後半月工時抵扣</span></div>
-              
-            </div>
-            
-            <div class="day-card" data-date="2026-09-22">
-              <div class="date-line"><span>週二</span><strong>09/22</strong></div>
-              <div class="shift">07:50–17:50 <b>[慈]</b></div>
-              <div class="meta"><span class="badge plus">+1h</span><span>門診日</span></div>
-              
-            </div>
-            
-            <div class="day-card" data-date="2026-09-23">
-              <div class="date-line"><span>週三</span><strong>09/23</strong></div>
-              <div class="shift">08:00–14:00 <b>[阿公]</b></div>
-              <div class="meta"><span class="badge minus">-3h</span><span>阿公14:00接手</span></div>
-              
-            </div>
-            
-            <div class="day-card" data-date="2026-09-24">
-              <div class="date-line"><span>週四</span><strong>09/24</strong></div>
-              <div class="shift">06:50–16:50 <b>[慈]</b></div>
-              <div class="meta"><span class="badge plus">+1h</span><span>07:30早會／會議</span></div>
-              <div class="note">07:30–08:30 醫教會；18:00–19:20 阿宏塞跟診</div>
-            </div>
-            
-            <div class="day-card" data-date="2026-09-25">
-              <div class="date-line"><span>週五</span><strong>09/25</strong></div>
-              <div class="shift">07:50–16:50 <b>[慈]</b></div>
-              <div class="meta"><span class="badge zero">0h</span><span>門診日／提早1小時下班抵扣</span></div>
-              
-            </div>
-            
-            <div class="day-card weekend" data-date="2026-09-26">
-              <div class="date-line"><span>週六</span><strong>09/26</strong></div>
-              <div class="shift rest">休假</div>
-              
-            </div>
-            
-            <div class="day-card weekend" data-date="2026-09-27">
-              <div class="date-line"><span>週日</span><strong>09/27</strong></div>
-              <div class="shift rest">休假</div>
-              
-            </div>
-            
-      </div>
-    </section>
-    
-    <section class="week">
-      <div class="week-title"><span>Week 5</span><small>09/28–10/04</small></div>
-      <div class="week-grid">
-        
-            <div class="day-card" data-date="2026-09-28">
-              <div class="date-line"><span>週一</span><strong>09/28</strong></div>
-              <div class="shift">08:00–17:00 <b>[慈]</b></div>
-              <div class="meta"><span class="badge zero">0h</span><span>常規日</span></div>
-              
-            </div>
-            
-            <div class="day-card" data-date="2026-09-29">
-              <div class="date-line"><span>週二</span><strong>09/29</strong></div>
-              <div class="shift">07:50–17:50 <b>[慈]</b></div>
-              <div class="meta"><span class="badge plus">+1h</span><span>門診日</span></div>
-              
-            </div>
-            
-            <div class="day-card" data-date="2026-09-30">
-              <div class="date-line"><span>週三</span><strong>09/30</strong></div>
-              <div class="shift">08:00–14:00 <b>[阿公]</b></div>
-              <div class="meta"><span class="badge minus">-3h</span><span>阿公14:00接手</span></div>
-              
-            </div>
-            <div class="day-card outside"><div class="date-line"><span>週四</span><strong>10/01</strong></div><div class="muted">9 月班表外</div></div><div class="day-card outside"><div class="date-line"><span>週五</span><strong>10/02</strong></div><div class="muted">9 月班表外</div></div><div class="day-card outside"><div class="date-line"><span>週六</span><strong>10/03</strong></div><div class="muted">9 月班表外</div></div><div class="day-card outside"><div class="date-line"><span>週日</span><strong>10/04</strong></div><div class="muted">9 月班表外</div></div>
-      </div>
-    </section>
-    
-  <div class="rules">
-    <b>固定規則：</b>每週三 08:00–14:00，由阿公 14:00 接手，當日 -3h。9/1–9/15 其餘平日下班維持 17:50–18:00；後半月以固定週三扣抵及 9/21 提早下班平衡工時。
-  </div>
-</main>
-<footer>此頁可直接用手機瀏覽器開啟；今日排班依手機日期自動顯示。</footer>
-<script>
-const schedule = [{"date": "2026-09-01", "md": "09/01", "weekday": "星期二", "caregiver": "鍇", "start": "07:50", "end": "17:50", "hours": 10, "diff": 1, "type": "門診日", "note": ""}, {"date": "2026-09-02", "md": "09/02", "weekday": "星期三", "caregiver": "阿公", "start": "08:00", "end": "14:00", "hours": 6, "diff": -3, "type": "阿公14:00接手", "note": ""}, {"date": "2026-09-03", "md": "09/03", "weekday": "星期四", "caregiver": "鍇", "start": "06:50", "end": "17:50", "hours": 11, "diff": 2, "type": "07:30早會／會議", "note": "07:30–08:30 全院"}, {"date": "2026-09-04", "md": "09/04", "weekday": "星期五", "caregiver": "鍇", "start": "06:50", "end": "17:50", "hours": 11, "diff": 2, "type": "07:30早會／會議", "note": "07:30–08:30 核心課"}, {"date": "2026-09-05", "md": "09/05", "weekday": "星期六", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": ""}, {"date": "2026-09-06", "md": "09/06", "weekday": "星期日", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": "婦專線上課考試"}, {"date": "2026-09-07", "md": "09/07", "weekday": "星期一", "caregiver": "鍇", "start": "08:00", "end": "18:00", "hours": 10, "diff": 1, "type": "常態加班1小時", "note": ""}, {"date": "2026-09-08", "md": "09/08", "weekday": "星期二", "caregiver": "鍇", "start": "06:50", "end": "17:50", "hours": 11, "diff": 2, "type": "07:30早會／會議", "note": "07:30–08:30 核心課；18:30–21:45 恩賜跟診"}, {"date": "2026-09-09", "md": "09/09", "weekday": "星期三", "caregiver": "阿公", "start": "08:00", "end": "14:00", "hours": 6, "diff": -3, "type": "阿公14:00接手", "note": ""}, {"date": "2026-09-10", "md": "09/10", "weekday": "星期四", "caregiver": "鍇", "start": "08:00", "end": "18:00", "hours": 10, "diff": 1, "type": "常態加班1小時", "note": ""}, {"date": "2026-09-11", "md": "09/11", "weekday": "星期五", "caregiver": "鍇", "start": "07:50", "end": "17:50", "hours": 10, "diff": 1, "type": "門診日", "note": ""}, {"date": "2026-09-12", "md": "09/12", "weekday": "星期六", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": ""}, {"date": "2026-09-13", "md": "09/13", "weekday": "星期日", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": "10:30–17:00 大台中中醫師公會演講"}, {"date": "2026-09-14", "md": "09/14", "weekday": "星期一", "caregiver": "鍇", "start": "06:50", "end": "17:50", "hours": 11, "diff": 2, "type": "07:30早會／會議", "note": "07:30–08:30 部務會議"}, {"date": "2026-09-15", "md": "09/15", "weekday": "星期二", "caregiver": "鍇", "start": "07:50", "end": "17:50", "hours": 10, "diff": 1, "type": "門診日", "note": ""}, {"date": "2026-09-16", "md": "09/16", "weekday": "星期三", "caregiver": "阿公", "start": "08:00", "end": "14:00", "hours": 6, "diff": -3, "type": "阿公14:00接手", "note": "16:30–17:30 師培501"}, {"date": "2026-09-17", "md": "09/17", "weekday": "星期四", "caregiver": "慈", "start": "06:50", "end": "16:50", "hours": 10, "diff": 1, "type": "07:30早會／會議", "note": "07:30–08:30 全院"}, {"date": "2026-09-18", "md": "09/18", "weekday": "星期五", "caregiver": "慈", "start": "07:50", "end": "16:50", "hours": 9, "diff": 0, "type": "門診日／提早1小時下班抵扣", "note": ""}, {"date": "2026-09-19", "md": "09/19", "weekday": "星期六", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": ""}, {"date": "2026-09-20", "md": "09/20", "weekday": "星期日", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": ""}, {"date": "2026-09-21", "md": "09/21", "weekday": "星期一", "caregiver": "慈", "start": "08:00", "end": "15:00", "hours": 7, "diff": -2, "type": "後半月工時抵扣", "note": ""}, {"date": "2026-09-22", "md": "09/22", "weekday": "星期二", "caregiver": "慈", "start": "07:50", "end": "17:50", "hours": 10, "diff": 1, "type": "門診日", "note": ""}, {"date": "2026-09-23", "md": "09/23", "weekday": "星期三", "caregiver": "阿公", "start": "08:00", "end": "14:00", "hours": 6, "diff": -3, "type": "阿公14:00接手", "note": ""}, {"date": "2026-09-24", "md": "09/24", "weekday": "星期四", "caregiver": "慈", "start": "06:50", "end": "16:50", "hours": 10, "diff": 1, "type": "07:30早會／會議", "note": "07:30–08:30 醫教會；18:00–19:20 阿宏塞跟診"}, {"date": "2026-09-25", "md": "09/25", "weekday": "星期五", "caregiver": "慈", "start": "07:50", "end": "16:50", "hours": 9, "diff": 0, "type": "門診日／提早1小時下班抵扣", "note": ""}, {"date": "2026-09-26", "md": "09/26", "weekday": "星期六", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": ""}, {"date": "2026-09-27", "md": "09/27", "weekday": "星期日", "caregiver": "休假", "start": "", "end": "", "hours": 0, "diff": 0, "type": "休假", "note": ""}, {"date": "2026-09-28", "md": "09/28", "weekday": "星期一", "caregiver": "慈", "start": "08:00", "end": "17:00", "hours": 9, "diff": 0, "type": "常規日", "note": ""}, {"date": "2026-09-29", "md": "09/29", "weekday": "星期二", "caregiver": "慈", "start": "07:50", "end": "17:50", "hours": 10, "diff": 1, "type": "門診日", "note": ""}, {"date": "2026-09-30", "md": "09/30", "weekday": "星期三", "caregiver": "阿公", "start": "08:00", "end": "14:00", "hours": 6, "diff": -3, "type": "阿公14:00接手", "note": ""}];
-function localDateKey(){
-  const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth()+1).padStart(2,'0');
-  const day = String(d.getDate()).padStart(2,'0');
-  return `${y}-${m}-${day}`;
+
+
+body {
+
+  margin:0;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "PingFang TC",
+    "Noto Sans TC",
+    sans-serif;
+
+  background:#F7F9FC;
+
+  color:var(--text);
+
 }
-const key = localDateKey();
-const item = schedule.find(x => x.date === key);
-const box = document.getElementById('today');
-if(item){
-  if(item.start && item.end){
-    box.innerHTML = `今日 ${item.md}　${item.start}–${item.end} [${item.caregiver}]` +
-      `<small>${item.type || ''}${item.note ? '｜'+item.note : ''}</small>`;
-  } else {
-    box.innerHTML = `今日 ${item.md}　休假` + `<small>${item.note || ''}</small>`;
+
+
+
+/* =========================
+   頂部
+========================= */
+
+header {
+
+  background:var(--navy);
+
+  color:#fff;
+
+  padding:16px;
+
+  box-shadow:
+    0 2px 8px
+    rgba(0,0,0,.12);
+
+}
+
+
+.topbar {
+
+  max-width:1100px;
+
+  margin:auto;
+
+}
+
+
+header h1 {
+
+  font-size:20px;
+
+  margin:
+    0
+    0
+    10px;
+
+  font-weight:750;
+
+}
+
+
+
+/* =========================
+   今日提醒
+========================= */
+
+.today {
+
+  background:#fff;
+
+  color:var(--navy);
+
+  border-radius:14px;
+
+  padding:
+    13px
+    14px;
+
+  font-size:18px;
+
+  font-weight:750;
+
+  line-height:1.4;
+
+}
+
+
+.today small {
+
+  display:block;
+
+  font-size:12px;
+
+  color:var(--muted);
+
+  font-weight:500;
+
+  margin-top:5px;
+
+}
+
+
+
+/* =========================
+   按鈕
+========================= */
+
+.actions {
+
+  display:flex;
+
+  gap:8px;
+
+  margin-top:10px;
+
+  flex-wrap:wrap;
+
+}
+
+
+button,
+.action-link {
+
+  appearance:none;
+
+  border:0;
+
+  border-radius:10px;
+
+  padding:
+    10px
+    13px;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  text-decoration:none;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+}
+
+
+.refresh {
+
+  background:#fff;
+
+  color:var(--navy);
+
+}
+
+
+.edit {
+
+  background:#F6C760;
+
+  color:#5B4515;
+
+}
+
+
+button:disabled {
+
+  opacity:.55;
+
+  cursor:not-allowed;
+
+}
+
+
+.status {
+
+  font-size:11px;
+
+  opacity:.9;
+
+  margin-top:7px;
+
+  min-height:16px;
+
+}
+
+
+
+/* =========================
+   主內容
+========================= */
+
+main {
+
+  max-width:1100px;
+
+  margin:auto;
+
+  padding:14px;
+
+}
+
+
+
+/* =========================
+   月工時統計
+========================= */
+
+.summary {
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:8px;
+
+  margin-bottom:14px;
+
+}
+
+
+.stat {
+
+  background:#fff;
+
+  border:
+    1px
+    solid
+    var(--line);
+
+  border-radius:12px;
+
+  padding:10px;
+
+  text-align:center;
+
+}
+
+
+.stat b {
+
+  display:block;
+
+  font-size:18px;
+
+  color:var(--navy);
+
+}
+
+
+.stat span {
+
+  font-size:12px;
+
+  color:var(--muted);
+
+}
+
+
+
+/* =========================
+   每週班表
+========================= */
+
+.week {
+
+  background:#fff;
+
+  border:
+    1px
+    solid
+    var(--line);
+
+  border-radius:16px;
+
+  overflow:hidden;
+
+  margin-bottom:14px;
+
+  box-shadow:
+    0 2px 6px
+    rgba(36,74,122,.05);
+
+}
+
+
+.week-title {
+
+  background:var(--blue);
+
+  color:white;
+
+  padding:
+    10px
+    12px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  font-weight:700;
+
+}
+
+
+.week-title small {
+
+  font-weight:500;
+
+  opacity:.9;
+
+}
+
+
+.week-grid {
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(7,1fr);
+
+}
+
+
+
+/* =========================
+   每日卡片
+========================= */
+
+.day-card {
+
+  padding:10px;
+
+  border-right:
+    1px
+    solid
+    var(--line);
+
+  border-bottom:
+    1px
+    solid
+    var(--line);
+
+  min-height:140px;
+
+  background:#fff;
+
+}
+
+
+.day-card:nth-child(7n) {
+
+  border-right:0;
+
+}
+
+
+.day-card.weekend {
+
+  background:var(--weekend);
+
+}
+
+
+.day-card.today-highlight {
+
+  outline:
+    3px
+    solid
+    var(--accent);
+
+  outline-offset:-3px;
+
+  background:#FFF9E8;
+
+}
+
+
+
+/* =========================
+   日期
+========================= */
+
+.date-line {
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:8px;
+
+  font-size:12px;
+
+  color:var(--muted);
+
+  margin-bottom:8px;
+
+}
+
+
+.date-line strong {
+
+  font-size:14px;
+
+  color:var(--navy);
+
+}
+
+
+
+/* =========================
+   工作時間
+========================= */
+
+.shift {
+
+  font-size:14px;
+
+  line-height:1.5;
+
+  font-weight:650;
+
+  margin-bottom:7px;
+
+}
+
+
+
+/* =========================
+   增減時數
+========================= */
+
+.meta {
+
+  display:flex;
+
+  gap:6px;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+  font-size:12px;
+
+  color:#4B5563;
+
+  line-height:1.4;
+
+}
+
+
+.badge {
+
+  padding:
+    2px
+    7px;
+
+  border-radius:999px;
+
+  font-weight:700;
+
+}
+
+
+.badge.plus {
+
+  background:var(--plus-bg);
+
+  color:var(--plus);
+
+}
+
+
+.badge.minus {
+
+  background:var(--minus-bg);
+
+  color:var(--minus);
+
+}
+
+
+.badge.zero {
+
+  background:#EEF2F7;
+
+  color:#56606F;
+
+}
+
+
+
+/* =========================
+   備註
+========================= */
+
+.note {
+
+  margin-top:8px;
+
+  padding-top:7px;
+
+  border-top:
+    1px
+    dashed
+    #D6DCE5;
+
+  font-size:12px;
+
+  line-height:1.5;
+
+  color:#6A4D14;
+
+  white-space:pre-line;
+
+}
+
+
+
+/* =========================
+   載入失敗
+========================= */
+
+.empty {
+
+  background:#fff;
+
+  border:
+    1px
+    solid
+    var(--line);
+
+  border-radius:14px;
+
+  padding:20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+}
+
+
+
+/* =========================
+   頁尾
+========================= */
+
+footer {
+
+  text-align:center;
+
+  color:#8B95A5;
+
+  font-size:11px;
+
+  padding:
+    0
+    12px
+    26px;
+
+}
+
+
+
+/* =========================
+   手機版
+========================= */
+
+@media(max-width:760px) {
+
+  main {
+
+    padding:10px;
+
   }
-  const el = document.querySelector(`[data-date="${key}"]`);
-  if(el) el.classList.add('today-highlight');
-} else {
-  const d = new Date();
-  const md = String(d.getMonth()+1).padStart(2,'0') + '/' + String(d.getDate()).padStart(2,'0');
-  box.innerHTML = `今日 ${md}　9 月班表無資料` + `<small>班表期間：2026/09/01–09/30</small>`;
+
+
+  .today {
+
+    font-size:17px;
+
+  }
+
+
+  .actions > * {
+
+    flex:1;
+
+  }
+
+
+  .week-grid {
+
+    display:block;
+
+  }
+
+
+  .day-card {
+
+    min-height:0;
+
+    border-right:0;
+
+    padding:
+      11px
+      12px;
+
+  }
+
+
+  .shift {
+
+    font-size:16px;
+
+    margin-bottom:5px;
+
+  }
+
+
+  .note {
+
+    font-size:13px;
+
+  }
+
 }
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+<header>
+
+  <div class="topbar">
+
+
+    <h1 id="pageTitle">
+
+      保母班表
+
+    </h1>
+
+
+    <div
+      id="today"
+      class="today"
+    >
+
+      今日排班讀取中…
+
+    </div>
+
+
+    <div class="actions">
+
+
+      <button
+        class="refresh"
+        id="refreshBtn"
+        type="button"
+      >
+
+        ↻ 重新整理班表
+
+      </button>
+
+
+      <a
+        class="action-link edit"
+        id="editBtn"
+        href="#"
+      >
+
+        ✎ 編輯班表
+
+      </a>
+
+
+    </div>
+
+
+    <div
+      id="status"
+      class="status"
+    ></div>
+
+
+  </div>
+
+</header>
+
+
+
+<main>
+
+
+  <div class="summary">
+
+
+    <div class="stat">
+
+      <b id="plusHours">
+
+        —
+
+      </b>
+
+      <span>
+
+        加班
+
+      </span>
+
+    </div>
+
+
+    <div class="stat">
+
+      <b id="minusHours">
+
+        —
+
+      </b>
+
+      <span>
+
+        扣抵
+
+      </span>
+
+    </div>
+
+
+    <div class="stat">
+
+      <b id="netHours">
+
+        —
+
+      </b>
+
+      <span>
+
+        淨增減
+
+      </span>
+
+    </div>
+
+
+  </div>
+
+
+
+  <div id="calendar">
+
+
+    <div class="empty">
+
+      正在讀取 Google 試算表…
+
+    </div>
+
+
+  </div>
+
+
+</main>
+
+
+
+<footer>
+
+  資料來源：Google 試算表「排班明細」
+
+  <br>
+
+  修改班表後，
+  按「重新整理班表」即可取得最新版。
+
+</footer>
+
+
+
+<script>
+
+
+/* ==================================================
+   Google 試算表資料網址
+
+   網站會從這裡讀取班表。
+================================================== */
+
+const CSV_URL =
+
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vSY7Cea4x3eUlnJ_VGEPH3BCQbVdDlyyBPrX1-cV1kRarW1iaRhbo4CxBWlQ5n85Q/pub?gid=1198894985&single=true&output=csv";
+
+
+
+/* ==================================================
+   Google 試算表編輯網址
+
+   點「編輯班表」時會開啟這裡。
+================================================== */
+
+const EDIT_SHEET_URL =
+
+"https://docs.google.com/spreadsheets/d/1FzH1UvkD6ihRs71UAYOWsS5rSAfWoHU3/edit?gid=1114136972#gid=1114136972";
+
+
+
+/* ==================================================
+   快速選取 HTML 元素
+================================================== */
+
+const $ =
+  selector =>
+    document.querySelector(
+      selector
+    );
+
+
+
+/* ==================================================
+   CSV 解析
+================================================== */
+
+function parseCSV(text) {
+
+
+  const rows = [];
+
+
+  let row = [];
+
+  let cell = "";
+
+  let inQuotes = false;
+
+
+
+  for (
+
+    let i = 0;
+
+    i < text.length;
+
+    i++
+
+  ) {
+
+
+    const ch =
+      text[i];
+
+
+
+    if (inQuotes) {
+
+
+      if (
+
+        ch === '"'
+
+        &&
+
+        text[i + 1] === '"'
+
+      ) {
+
+
+        cell += '"';
+
+        i++;
+
+
+      }
+
+
+      else if (
+
+        ch === '"'
+
+      ) {
+
+
+        inQuotes = false;
+
+
+      }
+
+
+      else {
+
+
+        cell += ch;
+
+
+      }
+
+
+    }
+
+
+    else {
+
+
+      if (
+
+        ch === '"'
+
+      ) {
+
+
+        inQuotes = true;
+
+
+      }
+
+
+      else if (
+
+        ch === ','
+
+      ) {
+
+
+        row.push(
+          cell
+        );
+
+
+        cell = "";
+
+
+      }
+
+
+      else if (
+
+        ch === '\n'
+
+      ) {
+
+
+        row.push(
+
+          cell.replace(
+            /\r$/,
+            ""
+          )
+
+        );
+
+
+        rows.push(
+          row
+        );
+
+
+        row = [];
+
+        cell = "";
+
+
+      }
+
+
+      else {
+
+
+        cell += ch;
+
+
+      }
+
+
+    }
+
+
+  }
+
+
+
+  row.push(
+
+    cell.replace(
+      /\r$/,
+      ""
+    )
+
+  );
+
+
+
+  if (
+
+    row.some(
+
+      x =>
+        x !== ""
+
+    )
+
+  ) {
+
+
+    rows.push(
+      row
+    );
+
+
+  }
+
+
+
+  return rows;
+
+
+}
+
+
+
+/* ==================================================
+   日期解析
+================================================== */
+
+function parseDate(value) {
+
+
+  const s =
+
+    String(
+      value || ""
+    )
+    .trim();
+
+
+
+  let m;
+
+
+
+  /* 2026/09/01 */
+
+  m = s.match(
+
+    /^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})$/
+
+  );
+
+
+  if (m) {
+
+
+    return new Date(
+
+      Number(
+        m[1]
+      ),
+
+      Number(
+        m[2]
+      ) - 1,
+
+      Number(
+        m[3]
+      )
+
+    );
+
+
+  }
+
+
+
+  /* 09/01/2026 */
+
+  m = s.match(
+
+    /^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/
+
+  );
+
+
+  if (m) {
+
+
+    return new Date(
+
+      Number(
+        m[3]
+      ),
+
+      Number(
+        m[1]
+      ) - 1,
+
+      Number(
+        m[2]
+      )
+
+    );
+
+
+  }
+
+
+
+  const d =
+    new Date(s);
+
+
+
+  if (
+
+    Number.isNaN(
+      d.getTime()
+    )
+
+  ) {
+
+
+    return null;
+
+
+  }
+
+
+
+  return d;
+
+
+}
+
+
+
+/* ==================================================
+   時間整理
+
+   Google Sheet 如果輸出
+   7:50:00 AM
+
+   會轉成
+   07:50
+================================================== */
+
+function formatTime(value) {
+
+
+  const s =
+
+    String(
+      value || ""
+    )
+    .trim();
+
+
+
+  if (!s) {
+
+    return "";
+
+  }
+
+
+
+  /* 24 小時制 */
+
+  let m = s.match(
+
+    /^(\d{1,2}):(\d{2})(?::\d{2})?$/
+
+  );
+
+
+  if (m) {
+
+
+    return (
+
+      String(
+        Number(
+          m[1]
+        )
+      )
+      .padStart(
+        2,
+        "0"
+      )
+
+      +
+
+      ":"
+
+      +
+
+      m[2]
+
+    );
+
+
+  }
+
+
+
+  /* AM / PM */
+
+  m = s.match(
+
+    /^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)$/i
+
+  );
+
+
+  if (m) {
+
+
+    let hour =
+      Number(
+        m[1]
+      );
+
+
+    const minute =
+      m[2];
+
+
+    const ampm =
+      m[3]
+      .toUpperCase();
+
+
+    if (
+
+      ampm === "PM"
+
+      &&
+
+      hour !== 12
+
+    ) {
+
+
+      hour += 12;
+
+
+    }
+
+
+    if (
+
+      ampm === "AM"
+
+      &&
+
+      hour === 12
+
+    ) {
+
+
+      hour = 0;
+
+
+    }
+
+
+
+    return (
+
+      String(
+        hour
+      )
+      .padStart(
+        2,
+        "0"
+      )
+
+      +
+
+      ":"
+
+      +
+
+      minute
+
+    );
+
+
+  }
+
+
+
+  return s;
+
+
+}
+
+
+
+/* ==================================================
+   MM/DD
+================================================== */
+
+function md(date) {
+
+
+  return (
+
+    String(
+
+      date.getMonth()
+      +
+      1
+
+    )
+    .padStart(
+      2,
+      "0"
+    )
+
+    +
+
+    "/"
+
+    +
+
+    String(
+
+      date.getDate()
+
+    )
+    .padStart(
+      2,
+      "0"
+    )
+
+  );
+
+
+}
+
+
+
+/* ==================================================
+   YYYY-MM-DD
+================================================== */
+
+function ymd(date) {
+
+
+  return (
+
+    date.getFullYear()
+
+    +
+
+    "-"
+
+    +
+
+    String(
+
+      date.getMonth()
+      +
+      1
+
+    )
+    .padStart(
+      2,
+      "0"
+    )
+
+    +
+
+    "-"
+
+    +
+
+    String(
+
+      date.getDate()
+
+    )
+    .padStart(
+      2,
+      "0"
+    )
+
+  );
+
+
+}
+
+
+
+/* ==================================================
+   星期
+================================================== */
+
+function weekday(date) {
+
+
+  return [
+
+    "週日",
+
+    "週一",
+
+    "週二",
+
+    "週三",
+
+    "週四",
+
+    "週五",
+
+    "週六"
+
+  ][
+
+    date.getDay()
+
+  ];
+
+
+}
+
+
+
+/* ==================================================
+   數字轉換
+================================================== */
+
+function num(value) {
+
+
+  const n =
+
+    parseFloat(
+
+      String(
+        value || ""
+      )
+
+      .replace(
+
+        /[+h小時\s]/g,
+
+        ""
+
+      )
+
+    );
+
+
+
+  return (
+
+    Number.isFinite(
+      n
+    )
+
+    ?
+
+    n
+
+    :
+
+    0
+
+  );
+
+
+}
+
+
+
+/* ==================================================
+   防止 HTML 特殊字元干擾
+================================================== */
+
+function esc(value) {
+
+
+  return String(
+
+    value ?? ""
+
+  )
+  .replace(
+
+    /[&<>"']/g,
+
+    c => ({
+
+      "&":"&amp;",
+
+      "<":"&lt;",
+
+      ">":"&gt;",
+
+      '"':"&quot;",
+
+      "'":"&#39;"
+
+    }[c])
+
+  );
+
+
+}
+
+
+
+/* ==================================================
+   將 Google Sheet 欄位整理成網站資料
+================================================== */
+
+function normalize(rows) {
+
+
+  if (
+
+    !rows.length
+
+  ) {
+
+
+    return [];
+
+
+  }
+
+
+
+  const headers =
+
+    rows[0]
+
+    .map(
+
+      x =>
+
+        String(x)
+        .trim()
+
+    );
+
+
+
+  const find =
+
+    (...names) =>
+
+      headers.findIndex(
+
+        header =>
+
+          names.includes(
+            header
+          )
+
+      );
+
+
+
+  const idx = {
+
+
+    date:
+
+      find(
+        "日期"
+      ),
+
+
+    weekday:
+
+      find(
+        "星期"
+      ),
+
+
+    caregiver:
+
+      find(
+
+        "接手人",
+
+        "接手／主要安排",
+
+        "接手/主要安排"
+
+      ),
+
+
+    start:
+
+      find(
+
+        "上班",
+
+        "保母上班"
+
+      ),
+
+
+    end:
+
+      find(
+
+        "下班",
+
+        "保母下班"
+
+      ),
+
+
+    hours:
+
+      find(
+
+        "實際工時"
+
+      ),
+
+
+    diff:
+
+      find(
+
+        "增減時數"
+
+      ),
+
+
+    type:
+
+      find(
+
+        "排班類型"
+
+      ),
+
+
+    note:
+
+      find(
+
+        "特殊備註",
+
+        "特殊行程／備註",
+
+        "特殊行程/備註"
+
+      )
+
+
+  };
+
+
+
+  return rows
+
+  .slice(1)
+
+  .map(
+
+    row => {
+
+
+      const date =
+
+        parseDate(
+
+          row[
+            idx.date
+          ]
+
+        );
+
+
+
+      if (!date) {
+
+
+        return null;
+
+
+      }
+
+
+
+      return {
+
+
+        date:date,
+
+
+        caregiver:
+
+          idx.caregiver >= 0
+
+          ?
+
+          row[
+            idx.caregiver
+          ]
+
+          :
+
+          "",
+
+
+        start:
+
+          idx.start >= 0
+
+          ?
+
+          formatTime(
+
+            row[
+              idx.start
+            ]
+
+          )
+
+          :
+
+          "",
+
+
+        end:
+
+          idx.end >= 0
+
+          ?
+
+          formatTime(
+
+            row[
+              idx.end
+            ]
+
+          )
+
+          :
+
+          "",
+
+
+        hours:
+
+          idx.hours >= 0
+
+          ?
+
+          num(
+
+            row[
+              idx.hours
+            ]
+
+          )
+
+          :
+
+          0,
+
+
+        diff:
+
+          idx.diff >= 0
+
+          ?
+
+          num(
+
+            row[
+              idx.diff
+            ]
+
+          )
+
+          :
+
+          0,
+
+
+        type:
+
+          idx.type >= 0
+
+          ?
+
+          row[
+            idx.type
+          ]
+
+          :
+
+          "",
+
+
+        note:
+
+          idx.note >= 0
+
+          ?
+
+          row[
+            idx.note
+          ]
+
+          :
+
+          ""
+
+
+      };
+
+
+    }
+
+  )
+
+  .filter(
+    Boolean
+  )
+
+  .sort(
+
+    (a,b) =>
+
+      a.date
+      -
+      b.date
+
+  );
+
+
+}
+
+
+
+/* ==================================================
+   找該週星期一
+================================================== */
+
+function weekMonday(date) {
+
+
+  const d =
+
+    new Date(
+
+      date.getFullYear(),
+
+      date.getMonth(),
+
+      date.getDate()
+
+    );
+
+
+
+  const shift =
+
+    (
+
+      d.getDay()
+      +
+      6
+
+    )
+    %
+    7;
+
+
+
+  d.setDate(
+
+    d.getDate()
+    -
+    shift
+
+  );
+
+
+
+  return d;
+
+
+}
+
+
+
+/* ==================================================
+   畫面產生
+================================================== */
+
+function render(data) {
+
+
+  if (
+
+    !data.length
+
+  ) {
+
+
+    throw new Error(
+
+      "試算表沒有可辨識的排班資料"
+
+    );
+
+
+  }
+
+
+
+  const first =
+
+    data[0].date;
+
+
+
+  const last =
+
+    data[
+      data.length
+      -
+      1
+    ].date;
+
+
+
+  /* =========================
+     網站標題
+  ========================= */
+
+  const monthLabel =
+
+    first.getFullYear()
+
+    +
+
+    " 年 "
+
+    +
+
+    (
+
+      first.getMonth()
+      +
+      1
+
+    )
+
+    +
+
+    " 月";
+
+
+
+  $("#pageTitle")
+  .textContent =
+
+    monthLabel
+
+    +
+
+    "保母班表";
+
+
+
+  /* =========================
+     工時統計
+  ========================= */
+
+  const plus =
+
+    data.reduce(
+
+      (sum,item) =>
+
+        sum
+
+        +
+
+        (
+
+          item.diff > 0
+
+          ?
+
+          item.diff
+
+          :
+
+          0
+
+        ),
+
+      0
+
+    );
+
+
+
+  const minus =
+
+    data.reduce(
+
+      (sum,item) =>
+
+        sum
+
+        +
+
+        (
+
+          item.diff < 0
+
+          ?
+
+          -item.diff
+
+          :
+
+          0
+
+        ),
+
+      0
+
+    );
+
+
+
+  const net =
+
+    data.reduce(
+
+      (sum,item) =>
+
+        sum
+        +
+        item.diff,
+
+      0
+
+    );
+
+
+
+  $("#plusHours")
+  .textContent =
+
+    plus
+
+    +
+
+    "h";
+
+
+
+  $("#minusHours")
+  .textContent =
+
+    minus
+
+    +
+
+    "h";
+
+
+
+  $("#netHours")
+  .textContent =
+
+    (
+
+      net > 0
+
+      ?
+
+      "+"
+
+      :
+
+      ""
+
+    )
+
+    +
+
+    net
+
+    +
+
+    "h";
+
+
+
+  /* =========================
+     今日排班
+  ========================= */
+
+  const today =
+    new Date();
+
+
+
+  const todayKey =
+    ymd(
+      today
+    );
+
+
+
+  const todayItem =
+
+    data.find(
+
+      item =>
+
+        ymd(
+          item.date
+        )
+
+        ===
+
+        todayKey
+
+    );
+
+
+
+  if (todayItem) {
+
+
+    let shift;
+
+
+
+    if (
+
+      todayItem.start
+
+      &&
+
+      todayItem.end
+
+    ) {
+
+
+      shift =
+
+        todayItem.start
+
+        +
+
+        "–"
+
+        +
+
+        todayItem.end
+
+        +
+
+        " ["
+
+        +
+
+        todayItem.caregiver
+
+        +
+
+        "]";
+
+
+    }
+
+
+    else {
+
+
+      shift =
+        "休假";
+
+
+    }
+
+
+
+    $("#today")
+    .innerHTML =
+
+      "今日 "
+
+      +
+
+      md(today)
+
+      +
+
+      "　"
+
+      +
+
+      esc(shift)
+
+      +
+
+      "<small>"
+
+      +
+
+      esc(
+        todayItem.type || ""
+      )
+
+      +
+
+      (
+
+        todayItem.note
+
+        ?
+
+        "｜"
+
+        +
+
+        esc(
+          todayItem.note
+        )
+
+        :
+
+        ""
+
+      )
+
+      +
+
+      "</small>";
+
+
+  }
+
+
+  else {
+
+
+    $("#today")
+    .innerHTML =
+
+      "今日 "
+
+      +
+
+      md(today)
+
+      +
+
+      "　班表無資料"
+
+      +
+
+      "<small>目前資料範圍："
+
+      +
+
+      md(first)
+
+      +
+
+      "–"
+
+      +
+
+      md(last)
+
+      +
+
+      "</small>";
+
+
+  }
+
+
+
+  /* =========================
+     建立日期索引
+  ========================= */
+
+  const dataMap =
+
+    new Map(
+
+      data.map(
+
+        item => [
+
+          ymd(
+            item.date
+          ),
+
+          item
+
+        ]
+
+      )
+
+    );
+
+
+
+  let cursor =
+
+    weekMonday(
+      first
+    );
+
+
+
+  const lastWeek =
+
+    weekMonday(
+      last
+    );
+
+
+
+  let html = "";
+
+  let weekNumber = 1;
+
+
+
+  /* =========================
+     每週產生班表
+  ========================= */
+
+  while (
+
+    cursor <= lastWeek
+
+  ) {
+
+
+    const weekStart =
+
+      new Date(
+        cursor
+      );
+
+
+
+    const weekEnd =
+
+      new Date(
+        cursor
+      );
+
+
+
+    weekEnd.setDate(
+
+      weekEnd.getDate()
+      +
+      6
+
+    );
+
+
+
+    let cards = "";
+
+
+
+    for (
+
+      let i = 0;
+
+      i < 7;
+
+      i++
+
+    ) {
+
+
+      const date =
+
+        new Date(
+          cursor
+        );
+
+
+
+      date.setDate(
+
+        date.getDate()
+        +
+        i
+
+      );
+
+
+
+      const item =
+
+        dataMap.get(
+
+          ymd(
+            date
+          )
+
+        );
+
+
+
+      /* 沒有資料的日期不顯示 */
+
+      if (!item) {
+
+
+        continue;
+
+
+      }
+
+
+
+      const weekend =
+
+        date.getDay() === 0
+
+        ||
+
+        date.getDay() === 6;
+
+
+
+      const todayClass =
+
+        ymd(date)
+        ===
+        todayKey;
+
+
+
+      const className = [
+
+        "day-card",
+
+        weekend
+
+        ?
+
+        "weekend"
+
+        :
+
+        "",
+
+        todayClass
+
+        ?
+
+        "today-highlight"
+
+        :
+
+        ""
+
+      ]
+
+      .filter(
+        Boolean
+      )
+
+      .join(
+        " "
+      );
+
+
+
+      let diffClass;
+
+
+      if (
+
+        item.diff > 0
+
+      ) {
+
+
+        diffClass =
+          "plus";
+
+
+      }
+
+
+      else if (
+
+        item.diff < 0
+
+      ) {
+
+
+        diffClass =
+          "minus";
+
+
+      }
+
+
+      else {
+
+
+        diffClass =
+          "zero";
+
+
+      }
+
+
+
+      const diffText =
+
+        item.diff > 0
+
+        ?
+
+        "+"
+
+        +
+
+        item.diff
+
+        +
+
+        "h"
+
+        :
+
+        item.diff
+
+        +
+
+        "h";
+
+
+
+      let shiftHTML;
+
+
+
+      if (
+
+        item.start
+
+        &&
+
+        item.end
+
+      ) {
+
+
+        shiftHTML =
+
+          '<div class="shift">'
+
+          +
+
+          esc(
+            item.start
+          )
+
+          +
+
+          "–"
+
+          +
+
+          esc(
+            item.end
+          )
+
+          +
+
+          " <b>["
+
+          +
+
+          esc(
+            item.caregiver
+          )
+
+          +
+
+          "]</b>"
+
+          +
+
+          "</div>";
+
+
+      }
+
+
+      else {
+
+
+        shiftHTML =
+
+          '<div class="shift">休假</div>';
+
+
+      }
+
+
+
+      cards +=
+
+        '<div class="'
+
+        +
+
+        className
+
+        +
+
+        '">'
+
+        +
+
+
+        '<div class="date-line">'
+
+        +
+
+        "<span>"
+
+        +
+
+        weekday(
+          date
+        )
+
+        +
+
+        "</span>"
+
+        +
+
+        "<strong>"
+
+        +
+
+        md(
+          date
+        )
+
+        +
+
+        "</strong>"
+
+        +
+
+        "</div>"
+
+        +
+
+
+        shiftHTML
+
+        +
+
+
+        '<div class="meta">'
+
+        +
+
+        '<span class="badge '
+
+        +
+
+        diffClass
+
+        +
+
+        '">'
+
+        +
+
+        diffText
+
+        +
+
+        "</span>"
+
+        +
+
+        "<span>"
+
+        +
+
+        esc(
+          item.type
+        )
+
+        +
+
+        "</span>"
+
+        +
+
+        "</div>"
+
+        +
+
+
+        (
+
+          item.note
+
+          ?
+
+          '<div class="note">'
+
+          +
+
+          esc(
+            item.note
+          )
+
+          +
+
+          "</div>"
+
+          :
+
+          ""
+
+        )
+
+        +
+
+
+        "</div>";
+
+
+    }
+
+
+
+    html +=
+
+      '<section class="week">'
+
+      +
+
+      '<div class="week-title">'
+
+      +
+
+      "<span>Week "
+
+      +
+
+      weekNumber
+
+      +
+
+      "</span>"
+
+      +
+
+      "<small>"
+
+      +
+
+      md(
+        weekStart
+      )
+
+      +
+
+      "–"
+
+      +
+
+      md(
+        weekEnd
+      )
+
+      +
+
+      "</small>"
+
+      +
+
+      "</div>"
+
+      +
+
+      '<div class="week-grid">'
+
+      +
+
+      cards
+
+      +
+
+      "</div>"
+
+      +
+
+      "</section>";
+
+
+
+    cursor.setDate(
+
+      cursor.getDate()
+      +
+      7
+
+    );
+
+
+    weekNumber++;
+
+
+  }
+
+
+
+  $("#calendar")
+  .innerHTML =
+    html;
+
+
+}
+
+
+
+/* ==================================================
+   從 Google Sheet 取得最新版
+================================================== */
+
+async function loadSchedule() {
+
+
+  $("#status")
+  .textContent =
+
+    "正在取得最新班表…";
+
+
+
+  $("#refreshBtn")
+  .disabled =
+    true;
+
+
+
+  try {
+
+
+    /* 加入時間戳避免瀏覽器快取 */
+
+    const url =
+
+      CSV_URL
+
+      +
+
+      (
+
+        CSV_URL.includes("?")
+
+        ?
+
+        "&"
+
+        :
+
+        "?"
+
+      )
+
+      +
+
+      "_="
+
+      +
+
+      Date.now();
+
+
+
+    const response =
+
+      await fetch(
+
+        url,
+
+        {
+
+          cache:"no-store"
+
+        }
+
+      );
+
+
+
+    if (
+
+      !response.ok
+
+    ) {
+
+
+      throw new Error(
+
+        "HTTP "
+
+        +
+
+        response.status
+
+      );
+
+
+    }
+
+
+
+    const text =
+
+      await response.text();
+
+
+
+    const rows =
+
+      parseCSV(
+        text
+      );
+
+
+
+    const data =
+
+      normalize(
+        rows
+      );
+
+
+
+    render(
+      data
+    );
+
+
+
+    const now =
+      new Date();
+
+
+
+    $("#status")
+    .textContent =
+
+      "已更新："
+
+      +
+
+      now.toLocaleTimeString(
+
+        "zh-TW",
+
+        {
+
+          hour:"2-digit",
+
+          minute:"2-digit"
+
+        }
+
+      );
+
+
+  }
+
+
+  catch(error) {
+
+
+    console.error(
+      error
+    );
+
+
+
+    $("#status")
+    .textContent =
+
+      "讀取失敗，請確認 Google 試算表仍有「發布到網路」";
+
+
+
+    $("#calendar")
+    .innerHTML =
+
+      '<div class="empty">'
+
+      +
+
+      "暫時無法讀取班表"
+
+      +
+
+      "<br><br>"
+
+      +
+
+      "請稍後按「重新整理班表」"
+
+      +
+
+      "</div>";
+
+
+  }
+
+
+  finally {
+
+
+    $("#refreshBtn")
+    .disabled =
+      false;
+
+
+  }
+
+
+}
+
+
+
+/* ==================================================
+   重新整理班表按鈕
+================================================== */
+
+$("#refreshBtn")
+.addEventListener(
+
+  "click",
+
+  loadSchedule
+
+);
+
+
+
+/* ==================================================
+   編輯班表按鈕
+================================================== */
+
+$("#editBtn")
+.href =
+  EDIT_SHEET_URL;
+
+
+
+$("#editBtn")
+.target =
+  "_blank";
+
+
+
+$("#editBtn")
+.rel =
+  "noopener";
+
+
+
+/* ==================================================
+   網站開啟後自動讀取班表
+================================================== */
+
+loadSchedule();
+
+
 </script>
+
+
 </body>
+
 </html>
