@@ -84,7 +84,7 @@ footer{text-align:center;color:#8B95A5;font-size:11px;padding:0 12px 26px}
 <footer>線上版保母班表｜資料由 Google 試算表同步</footer>
 
 <script>
-const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSqa3tTj2jo74GYQGatln-rAAVC4isCJmj4jpwCqCuqGzUmHVeAIgiFbbgGyoJIdLqELfTQKctGfDSW/pub?output=csv";
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTPSatEoUiZjj2Y986UK_0cxloiAQAKYnyj9ghiGdnJgZZuNAE4mGxJ4YWaLMALtRdGDtkX4BrMYXHU/pub?gid=1198894985&single=true&output=csv";
 
 // 預期欄位：日期、星期、接手人、上班、下班、實際工時、增減時數、排班類型、特殊備註
 const REQUIRED_HEADERS = ["日期","星期","接手人","上班","下班","增減時數","排班類型"];
@@ -297,12 +297,35 @@ function render(schedule){
   }
 }
 
+async function fetchTextWithFallback(url){
+  const targets = [
+    url,
+    "https://api.allorigins.win/raw?url=" + encodeURIComponent(url),
+    "https://corsproxy.io/?" + encodeURIComponent(url)
+  ];
+
+  let lastError = null;
+
+  for(const target of targets){
+    try{
+      const res = await fetch(target, {cache:"no-store"});
+      if(!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      if(!text || text.trim().length < 5) throw new Error("回傳內容為空");
+      return text;
+    }catch(err){
+      lastError = err;
+      console.warn("讀取失敗，改用下一個來源：", target, err);
+    }
+  }
+
+  throw lastError || new Error("所有資料來源皆讀取失敗");
+}
+
 async function loadSchedule(){
   try{
     const url = CSV_URL + (CSV_URL.includes("?") ? "&" : "?") + "_ts=" + Date.now();
-    const res = await fetch(url, {cache:"no-store"});
-    if(!res.ok) throw new Error(`Google 試算表回傳 ${res.status}`);
-    const text = await res.text();
+    const text = await fetchTextWithFallback(url);
     const rows = parseCSV(text);
     const schedule = rowsToSchedule(rows);
     render(schedule);
@@ -311,8 +334,9 @@ async function loadSchedule(){
     document.getElementById("scheduleRoot").className = "error";
     document.getElementById("scheduleRoot").innerHTML =
       `<b>班表讀取失敗</b><br><br>${escapeHtml(err.message)}<br><br>` +
-      `請確認 Google 試算表已「發布到網路」，且 CSV 發布的是「排班明細」分頁。`;
-    document.getElementById("today").innerHTML = `班表讀取失敗<small>請檢查 Google 試算表發布設定</small>`;
+      `CSV 網址可直接開啟，但瀏覽器可能阻擋跨來源讀取。此版本已加入備援讀取來源；如果仍失敗，請重新整理頁面一次。`;
+    document.getElementById("today").innerHTML =
+      `班表讀取失敗<small>請重新整理頁面，或稍後再試</small>`;
   }
 }
 
