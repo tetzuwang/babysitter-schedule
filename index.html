@@ -116,9 +116,18 @@ function parseCSV(text){
 function normalizeDate(v){
   v = String(v || "").trim();
   if(!v) return "";
-  // 支援 2026/09/01、2026-09-01、09/01/2026
+
+  // 2026/09/01、2026-09-01
   let m = v.match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})/);
   if(m) return `${m[1]}-${m[2].padStart(2,"0")}-${m[3].padStart(2,"0")}`;
+
+  // 09/01、9/1：直接套用今年，避免瀏覽器解讀成 2001 年
+  m = v.match(/^(\d{1,2})[\/\-](\d{1,2})$/);
+  if(m){
+    const year = new Date().getFullYear();
+    return `${year}-${m[1].padStart(2,"0")}-${m[2].padStart(2,"0")}`;
+  }
+
   const d = new Date(v);
   if(!isNaN(d)){
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
@@ -154,12 +163,10 @@ function weekdayShort(dateKey){
   return names[new Date(y,m-1,d).getDay()];
 }
 
-function mondayOf(dateKey){
+function sundayOf(dateKey){
   const [y,m,d] = dateKey.split("-").map(Number);
   const dt = new Date(y,m-1,d);
-  const day = dt.getDay();
-  const diff = day === 0 ? -6 : 1-day;
-  dt.setDate(dt.getDate()+diff);
+  dt.setDate(dt.getDate() - dt.getDay());
   return dt;
 }
 
@@ -217,8 +224,8 @@ function render(schedule){
 
   const first = schedule[0];
   const [year, month] = first.date.split("-").map(Number);
-  document.title = `${year} 年 ${month} 月保母班表`;
-  document.getElementById("pageTitle").textContent = `${year} 年 ${month} 月保母班表`;
+  document.title = `${month} 月保母班表`;
+  document.getElementById("pageTitle").textContent = `${month} 月保母班表`;
 
   const plus = schedule.reduce((s,x) => s + Math.max(0,x.diff), 0);
   const minus = schedule.reduce((s,x) => s + Math.abs(Math.min(0,x.diff)), 0);
@@ -229,16 +236,16 @@ function render(schedule){
   document.getElementById("netHours").textContent = `${net > 0 ? "+" : ""}${net}h`;
 
   const map = new Map(schedule.map(x => [x.date,x]));
-  const firstMonday = mondayOf(first.date);
+  const firstSunday = sundayOf(first.date);
   const lastDate = schedule[schedule.length-1].date;
-  const lastMonday = mondayOf(lastDate);
+  const lastSunday = sundayOf(lastDate);
 
   let html = "";
   let weekNo = 1;
-  for(let cursor = new Date(firstMonday); cursor <= lastMonday; cursor.setDate(cursor.getDate()+7), weekNo++){
-    const sunday = new Date(cursor); sunday.setDate(sunday.getDate()+6);
+  for(let cursor = new Date(firstSunday); cursor <= lastSunday; cursor.setDate(cursor.getDate()+7), weekNo++){
+    const saturday = new Date(cursor); saturday.setDate(saturday.getDate()+6);
     html += `<section class="week">
-      <div class="week-title"><span>Week ${weekNo}</span><small>${md(dateKeyFromDate(cursor))}–${md(dateKeyFromDate(sunday))}</small></div>
+      <div class="week-title"><span>Week ${weekNo}</span><small>${md(dateKeyFromDate(cursor))}–${md(dateKeyFromDate(saturday))}</small></div>
       <div class="week-grid">`;
 
     for(let i=0;i<7;i++){
@@ -293,7 +300,7 @@ function render(schedule){
     const el = document.querySelector(`[data-date="${key}"]`);
     if(el) el.classList.add("today-highlight");
   }else{
-    box.innerHTML = `今日 ${todayMD}　本月班表無資料<small>目前顯示：${year}/${String(month).padStart(2,"0")}</small>`;
+    box.innerHTML = `今日 ${todayMD}　本月班表無資料<small>目前顯示：${month} 月</small>`;
   }
 }
 
