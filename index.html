@@ -163,10 +163,12 @@ function weekdayShort(dateKey){
   return names[new Date(y,m-1,d).getDay()];
 }
 
-function sundayOf(dateKey){
+function mondayOf(dateKey){
   const [y,m,d] = dateKey.split("-").map(Number);
   const dt = new Date(y,m-1,d);
-  dt.setDate(dt.getDate() - dt.getDay());
+  const day = dt.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  dt.setDate(dt.getDate() + diff);
   return dt;
 }
 
@@ -236,16 +238,16 @@ function render(schedule){
   document.getElementById("netHours").textContent = `${net > 0 ? "+" : ""}${net}h`;
 
   const map = new Map(schedule.map(x => [x.date,x]));
-  const firstSunday = sundayOf(first.date);
+  const firstMonday = mondayOf(first.date);
   const lastDate = schedule[schedule.length-1].date;
-  const lastSunday = sundayOf(lastDate);
+  const lastMonday = mondayOf(lastDate);
 
   let html = "";
   let weekNo = 1;
-  for(let cursor = new Date(firstSunday); cursor <= lastSunday; cursor.setDate(cursor.getDate()+7), weekNo++){
-    const saturday = new Date(cursor); saturday.setDate(saturday.getDate()+6);
+  for(let cursor = new Date(firstMonday); cursor <= lastMonday; cursor.setDate(cursor.getDate()+7), weekNo++){
+    const sunday = new Date(cursor); sunday.setDate(sunday.getDate()+6);
     html += `<section class="week">
-      <div class="week-title"><span>Week ${weekNo}</span><small>${md(dateKeyFromDate(cursor))}–${md(dateKeyFromDate(saturday))}</small></div>
+      <div class="week-title"><span>Week ${weekNo}</span><small>${md(dateKeyFromDate(cursor))}–${md(dateKeyFromDate(sunday))}</small></div>
       <div class="week-grid">`;
 
     for(let i=0;i<7;i++){
